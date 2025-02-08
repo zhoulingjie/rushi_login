@@ -1,0 +1,44 @@
+<!-- app/templates/base.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户认证系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>用户认证系统</h1>
+            <nav>
+                {% if current_user.is_authenticated %}
+                    <span>欢迎, {{ current_user.username }}!</span>
+                    <a href="{{ url_for('auth.logout') }}">退出</a>
+                {% else %}
+                    <a href="{{ url_for('auth.login') }}">登录</a>
+                    <a href="{{ url_for('auth.register') }}">注册</a>
+                {% endif %}
+            </nav>
+        </header>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; 2023 用户认证系统</p>
+        </footer>
+    </div>
+</body>
+</html>

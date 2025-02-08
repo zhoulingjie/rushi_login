@@ -1,0 +1,19 @@
+<!-- app/templates/login.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>用户登录</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}
+    </div>
+    <div>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}
+    </div>
+    <button type="submit">登录</button>
+</form>
+<p>没有账号？<a href="{{ url_for('auth.register') }}">立即注册</a></p>
+{% endblock %}
