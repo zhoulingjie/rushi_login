@@ -6,6 +6,12 @@ from urllib.parse import urlparse
 db = SQLAlchemy()
 login_manager = LoginManager()
 
+# 添加 user_loader 回调函数
+@login_manager.user_loader
+def load_user(user_id):
+    # 根据用户 ID 从数据库中加载用户对象
+    return User.query.get(int(user_id))
+
 def init_cache(app):
     redis_url = urlparse(app.config['REDIS_URL'])
     return Redis(

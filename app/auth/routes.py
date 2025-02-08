@@ -19,6 +19,14 @@ def login():
         flash('用户名或密码错误')
     return render_template('login.html', form=form)
 
+@bp.route('/register', methods=['POST'])
+def register():
+    data = request.get_json()
+    user = User(username=data['username'])
+    user.set_password(data['password'])
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({"message": "User created"}), 201
 
 @bp.route('/welcome')
 def welcome():
