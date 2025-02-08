@@ -40,3 +40,7 @@ def init_db():
 - 管理员：admin/admin123
 - 普通用户：user/user123
         """)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
