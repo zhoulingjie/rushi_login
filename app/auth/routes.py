@@ -1,9 +1,9 @@
-# app/auth/routes.py
+# rushi_login/app/auth/routes.py
 from flask import render_template, redirect, url_for
 from flask_login import login_user, logout_user, current_user
 from app.models import User
 from .forms import LoginForm, RegistrationForm  # 新增表单类
-
+from . import bp  # 导入蓝图对象
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
