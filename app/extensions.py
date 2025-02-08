@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from redis import Redis
 from urllib.parse import urlparse
+from app.models import User
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -22,3 +23,7 @@ def init_cache(app):
     )
 
 cache = None  # 将在create_app中初始化
+
+def init_db():
+    global db
+    return db

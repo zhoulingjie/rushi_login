@@ -1,6 +1,6 @@
 from flask import Flask
 from app.config import Config
-from app.extensions import db, login_manager, cache
+from app.extensions import db, login_manager, cache, init_db
 
 
 def create_app(config_class=Config):
@@ -8,7 +8,8 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     # 初始化扩展
-    db.init_app(app)
+    db_instance = init_db()
+    db_instance.init_app(app)
     login_manager.init_app(app)
     cache.init_app(app) if hasattr(cache, 'init_app') else None
 
